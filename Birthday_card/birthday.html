@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  :root {
+    --cake-bg: #4e342e;
+    --icing: #ff4081;
+  }
+
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    font-family: 'Arial Rounded MT Bold', sans-serif;
+
+    /* ✅ Background image path */
+    background-image: url('us.jpeg');  
+    background-color: #222; /* Fallback */
+    background-size: contain;
+    background-position: center;
+  }
+
+  .card {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 40px;
+    border-radius: 40px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.2);
+    z-index: 10;
+    max-width: 600px;
+  }
+
+  h1 { color: #fff; text-shadow: 0 0 15px var(--icing); margin-bottom: 5px; }
+  p { color: #ccc; margin-bottom: 30px; }
+
+  .cake { position: relative; width: 200px; margin: 80px auto 40px; cursor: pointer; }
+  .layer { background: var(--cake-bg); width: 100%; height: 70px; border-radius: 15px; position: relative; }
+  .icing { position: absolute; top: 0; width: 100%; height: 25px; background: var(--icing); border-radius: 15px 15px 0 0; z-index: 2; }
+  .drip { position: absolute; top: 15px; width: 20px; background: var(--icing); border-radius: 0 0 20px 20px; }
+  .d1 { left: 10px; height: 40px; } .d2 { left: 50px; height: 25px; } .d3 { left: 90px; height: 45px; }
+
+  .candle { width: 12px; height: 50px; background: white; margin: -40px auto 0; border-radius: 4px; position: relative; z-index: 5; }
+  .flame { width: 18px; height: 28px; background: orange; border-radius: 50% 50% 20% 20%; position: absolute; top: -25px; left: -3px; animation: flicker 0.1s infinite; box-shadow: 0 0 20px yellow; }
+
+  #surprise-msg { display: none; color: #ffeb3b; font-size: 2rem; margin-top: 20px; }
+  .confetti { position: absolute; width: 8px; height: 8px; z-index: 100; animation: fall linear forwards; }
+
+  .message {
+    color: #ffeb3b;
+    font-size: 1.1rem;
+    margin-top: 20px;
+    line-height: 1.6;
+  }
+
+  @keyframes flicker { from { transform: scale(1); } to { transform: scale(1.1); } }
+  @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+</style>
+</head>
+<body>
+
+  <div class="card">
+    <h1 id="title">A Very Happiest Birthday My Madaniyu!           🐘</h1>
+    
+
+    <div class="cake" onclick="blowOut()">
+      <div class="candle"><div class="flame" id="flame"></div></div>
+      <div class="layer">
+        <div class="icing"></div>
+        <div class="drip d1"></div>
+        <div class="drip d2"></div>
+        <div class="drip d3"></div>
+      </div>
+    </div>
+
+    <div class="message" id="birthday-msg">
+      <p><b>Click the cake to blow the candle and make a wish</b></p>
+      JIYUU!! On this special day, I just want to remind you how much you mean to me.🫂 You’ve been my laughter in chaos, my comfort in silence, and my strength when I felt weak.❤️ Thank you for listening  my bak-bak without judging me and for standing by me 🥹 You’re not just my friend you’re my forever person😘 May this year bring you all the happiness you’ve given me a thousand times over✨🎉
+      Love you always, more than words can say. 💜✨
+
+      
+    </div>
+
+    <div id="surprise-msg">Surprised 🥳✨</div>
+  </div>
+
+<script>
+  function blowOut() {
+    document.getElementById('flame').style.display = 'none';
+    document.getElementById('title').innerText = "Wish Granted! ✨";
+    document.getElementById('sub').style.display = 'none';
+    document.getElementById('surprise-msg').style.display = 'block';
+    for(let i=0; i<80; i++) { createConfetti(); }
+  }
+
+  function createConfetti() {
+    const confetti = document.createElement('div');
+    confetti.className = 'confetti';
+    confetti.style.left = Math.random() * 100 + 'vw';
+    confetti.style.backgroundColor = ['#ff4081','#ffeb3b','#2196f3','#4caf50'][Math.floor(Math.random()*4)];
+    confetti.style.top = '-10px';
+    confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+    document.body.appendChild(confetti);
+    setTimeout(() => { confetti.remove(); }, 5000);
+  }
+</script>
+
+</body>
+</html>
